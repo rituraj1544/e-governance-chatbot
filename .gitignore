@@ -1,0 +1,39 @@
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Dependencies and generated frontend output
+backend/vendor/
+frontend/node_modules/
+frontend/dist/
+
+# Laravel runtime data
+backend/storage/app/*
+!backend/storage/app/.gitignore
+backend/storage/framework/cache/data/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/storage/logs/*
+backend/bootstrap/cache/*.php
+!backend/bootstrap/cache/.gitignore
+backend/database/*.sqlite
+
+# Python virtual environment and caches
+ml-service/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

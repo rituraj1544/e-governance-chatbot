@@ -1,0 +1,10 @@
+import { useEffect, useState } from 'react'
+import api from '../services/api.js'
+import Loading from '../components/Loading.jsx'
+
+export default function Faqs() {
+  const [search, setSearch] = useState(''); const [language, setLanguage] = useState('en'); const [items, setItems] = useState([]); const [loading, setLoading] = useState(true); const [error, setError] = useState('')
+  async function load() { setLoading(true); setError(''); try { const { data } = await api.get('/faqs', { params: { search: search || undefined, language } }); setItems(data.data || []) } catch { setError('FAQs could not be loaded. Check the backend connection.') } finally { setLoading(false) } }
+  useEffect(() => { load() }, [language])
+  return <section className="content-page"><div className="page-title-row"><div><span className="eyebrow">HELP CENTRE</span><h1>Frequently asked questions</h1><p>Quick answers about this information service.</p></div><label className="language-select">Language<select value={language} onChange={e => setLanguage(e.target.value)}><option value="en">English</option><option value="hi">हिन्दी</option><option value="hinglish">Hinglish</option></select></label></div><form className="search-toolbar" onSubmit={e => { e.preventDefault(); load() }}><input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search questions…" aria-label="Search FAQs" /><button className="button button-primary">Search</button></form>{error && <div className="alert alert-error">{error}</div>}{loading ? <Loading label="Loading questions…" /> : items.length ? <div className="faq-list">{items.map(faq => <details className="faq-item" key={faq.id}><summary>{faq.question}<span>+</span></summary><p>{faq.answer}</p>{faq.official_source_url && <a className="text-link" href={faq.official_source_url} target="_blank" rel="noreferrer">Official source ↗</a>}</details>)}</div> : <div className="empty-state"><h2>No questions found</h2><p>Try another phrase or ask the chatbot.</p></div>}</section>
+}

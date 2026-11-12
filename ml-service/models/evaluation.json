@@ -1,0 +1,181 @@
+{
+  "examples_per_intent": {
+    "aadhaar": 30,
+    "faq": 30,
+    "general_scheme": 31,
+    "pan_card": 30,
+    "pm_kisan": 30,
+    "ration_card": 30,
+    "scholarship": 31,
+    "unknown": 30
+  },
+  "total_examples": 242,
+  "split_sizes": {
+    "train": 144,
+    "validation": 49,
+    "test": 49
+  },
+  "random_state": 42,
+  "validation_comparison": {
+    "word": {
+      "validation_accuracy": 0.551,
+      "validation_macro_f1": 0.5791,
+      "threshold": 0.225
+    },
+    "char": {
+      "validation_accuracy": 0.6939,
+      "validation_macro_f1": 0.7016,
+      "threshold": 0.225
+    }
+  },
+  "selected_analyzer": "char",
+  "confidence_threshold": 0.225,
+  "test": {
+    "accuracy": 0.8776,
+    "macro_precision": 0.9187,
+    "macro_recall": 0.881,
+    "macro_f1": 0.8823,
+    "per_class": {
+      "aadhaar": {
+        "precision": 1.0,
+        "recall": 0.8333,
+        "f1-score": 0.9091,
+        "support": 6.0
+      },
+      "faq": {
+        "precision": 1.0,
+        "recall": 0.6667,
+        "f1-score": 0.8,
+        "support": 6.0
+      },
+      "general_scheme": {
+        "precision": 1.0,
+        "recall": 0.7143,
+        "f1-score": 0.8333,
+        "support": 7.0
+      },
+      "pan_card": {
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1-score": 0.8571,
+        "support": 6.0
+      },
+      "pm_kisan": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 6.0
+      },
+      "ration_card": {
+        "precision": 1.0,
+        "recall": 0.8333,
+        "f1-score": 0.9091,
+        "support": 6.0
+      },
+      "scholarship": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 6.0
+      },
+      "unknown": {
+        "precision": 0.6,
+        "recall": 1.0,
+        "f1-score": 0.75,
+        "support": 6.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        5,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        6,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        6
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "aadhaar",
+      "faq",
+      "general_scheme",
+      "pan_card",
+      "pm_kisan",
+      "ration_card",
+      "scholarship",
+      "unknown"
+    ]
+  }
+}
