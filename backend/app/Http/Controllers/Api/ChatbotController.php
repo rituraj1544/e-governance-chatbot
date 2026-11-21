@@ -17,7 +17,8 @@ class ChatbotController extends Controller
         ]);
         $answer = $chatbot->answer($data['query'], $data['language'] ?? null);
         $sessionId = $request->hasSession(true) ? $request->session()->getId() : null;
-        $savedUser = $request->user()?->status === 'active' ? $request->user() : null;
+        $user = auth('sanctum')->user() ?: $request->user();
+        $savedUser = $user?->status === 'active' ? $user : null;
         $history = ChatHistory::create([
             'user_id' => $savedUser?->id,
             'matched_scheme_id' => $answer['matched_scheme_id'],
