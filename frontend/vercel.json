@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/sanctum/:path*",
+      "destination": "https://e-governance-chatbot.onrender.com/sanctum/:path*"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "https://e-governance-chatbot.onrender.com/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
