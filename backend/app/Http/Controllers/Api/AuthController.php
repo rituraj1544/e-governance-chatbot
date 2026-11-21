@@ -25,8 +25,9 @@ class AuthController extends Controller
         $user = User::create([...$data, 'role' => 'citizen', 'status' => 'active']);
         Auth::login($user);
         $request->session()->regenerate();
+        $token = $user->createToken('auth-token')->plainTextToken;
 
-        return response()->json(['user' => $user], 201);
+        return response()->json(['user' => $user, 'token' => $token], 201);
     }
 
     public function login(Request $request)
@@ -55,12 +56,14 @@ class AuthController extends Controller
 
         Auth::login($user, $request->boolean('remember'));
         $request->session()->regenerate();
+        $token = $user->createToken('auth-token')->plainTextToken;
 
-        return response()->json(['user' => $user]);
+        return response()->json(['user' => $user, 'token' => $token]);
     }
 
     public function logout(Request $request)
     {
+        $request->user()?->currentAccessToken()?->delete();
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

@@ -8,7 +8,14 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const refreshUser = useCallback(async () => {
-    try { setUser(await currentUser()) } catch { setUser(null) } finally { setLoading(false) }
+    try {
+      setUser(await currentUser())
+    } catch {
+      localStorage.removeItem('token')
+      setUser(null)
+    } finally {
+      setLoading(false)
+    }
   }, [])
   useEffect(() => { refreshUser() }, [refreshUser])
   const value = useMemo(() => ({
@@ -22,6 +29,7 @@ export function AuthProvider({ children }) {
       } catch {
         // ignore logout network errors
       } finally {
+        localStorage.removeItem('token')
         setUser(null)
       }
     },

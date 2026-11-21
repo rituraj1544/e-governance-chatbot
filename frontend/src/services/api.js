@@ -20,6 +20,10 @@ export async function csrfCookie() {
 }
 
 api.interceptors.request.use(async config => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   if (['post', 'put', 'patch', 'delete'].includes(config.method?.toLowerCase())) await csrfCookie()
   return config
 })
