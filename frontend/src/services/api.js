@@ -1,7 +1,10 @@
 import axios from 'axios'
 
-const defaultOrigin = import.meta.env.DEV ? 'http://localhost:8000' : ''
-export const API_ORIGIN = (import.meta.env.VITE_API_URL !== undefined ? import.meta.env.VITE_API_URL : defaultOrigin).replace(/\/$/, '')
+// In development, use local backend or VITE_API_URL.
+// In production on Vercel, always use relative path '' so requests are proxied same-origin.
+export const API_ORIGIN = import.meta.env.DEV
+  ? (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '')
+  : ''
 let csrfRequest
 const api = axios.create({
   baseURL: `${API_ORIGIN}/api`, withCredentials: true, withXSRFToken: true,
