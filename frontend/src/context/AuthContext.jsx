@@ -16,7 +16,15 @@ export function AuthProvider({ children }) {
     async register(payload) { const next = await registerAccount(payload); setUser(next); return next },
     async login(payload) { const next = await loginAccount(payload); setUser(next); return next },
     async loginAdmin(payload) { const next = await loginAdminService(payload); setUser(next); return next },
-    async logout() { await logoutAccount(); setUser(null) },
+    async logout() {
+      try {
+        await logoutAccount()
+      } catch {
+        // ignore logout network errors
+      } finally {
+        setUser(null)
+      }
+    },
     async updateProfile(payload) { const next = (await api.patch('/profile', payload)).data.user; setUser(next); return next },
   }), [user, loading, refreshUser])
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
