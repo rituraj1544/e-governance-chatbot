@@ -11,7 +11,7 @@ const api = axios.create({
 export async function csrfCookie() {
   if (!csrfRequest) {
     csrfRequest = axios.get(`${API_ORIGIN}/sanctum/csrf-cookie`, { withCredentials: true })
-      .catch(error => { csrfRequest = null; throw error })
+      .catch(() => { csrfRequest = null })
   }
   await csrfRequest
 }
